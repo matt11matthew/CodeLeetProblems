@@ -40,30 +40,33 @@ s consists of English letters, digits, symbols and spaces.
 public class LongestSubstringWithoutRepeatingCharacters  extends Problem {
     @Override
     public void start() {
-        String input = "abcabcbb";
-        System.out.println(lengthOfLongestSubstring(input));
+//        System.out.println(lengthOfLongestSubstring("bbbbb"));
+        System.out.println(lengthOfLongestSubstring("abcabcbb"));
 
     }
 
     public int lengthOfLongestSubstring(String s) {
-        char lastChar= (char) '-';
-        int max = 0;
+        char lastChar;
         int res = 0;
+
+        boolean first = true;
+
+        int cur = 0;
 
 
         for (char c : s.toCharArray()) {
-            if (lastChar !='-'){
-
-
-                if (lastChar==c){
-                    max=0;
-                } else {
-                    max++;
+            if (!first){
+                if (c==lastChar){ //NO MORE MATCH
+                    res = Math.max(res, cur);
+                    System.err.println(c+" " + res);
+                    cur = 0;
+                    continue;
                 }
             }
-            res=Math.max(max,res);
-
+            cur++;
+            first=false;
             lastChar=c;
+
         }
         return res;
 
