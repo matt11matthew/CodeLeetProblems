@@ -1,6 +1,9 @@
 package problems;
 
 import api.Problem;
+
+import java.util.HashMap;
+import java.util.HashSet;
 /*
 3. Longest Substring Without Repeating Characters
 Medium
@@ -40,38 +43,39 @@ s consists of English letters, digits, symbols and spaces.
 public class LongestSubstringWithoutRepeatingCharacters  extends Problem {
     @Override
     public void start() {
-//        System.out.println(lengthOfLongestSubstring("bbbbb"));
+        System.out.println(lengthOfLongestSubstring("bbbbb"));
         System.out.println(lengthOfLongestSubstring("abcabcbb"));
+        System.out.println(lengthOfLongestSubstring("hello"));
+        System.out.println(lengthOfLongestSubstring(" "));
+        System.out.println(lengthOfLongestSubstring("aab"));
 
     }
 
+    /*
+    Generate all possible substrings &
+     check for each substring if it's valid and keep updating maxLen accordingly.
+
+     */
     public int lengthOfLongestSubstring(String s) {
-        char lastChar;
-        int res = 0;
 
-        boolean first = true;
+        int l = 0;
+        int max = 0;
 
-        int cur = 0;
+        HashSet<Character> charSet = new HashSet<>();
 
+        char[] chars = s.toCharArray();
 
-        for (char c : s.toCharArray()) {
-            if (!first){
-                if (c==lastChar){ //NO MORE MATCH
-                    res = Math.max(res, cur);
-                    System.err.println(c+" " + res);
-                    cur = 0;
-                    continue;
-                }
+        for (int i = 0; i < chars.length; i++) {
+            while (charSet.contains(chars[i])) {
+                charSet.remove(chars[i]);
+                l++;
             }
-            cur++;
-            first=false;
-            lastChar=c;
-
+            charSet.add(chars[i]);
+            max=Math.max(max, i-l+1);
         }
-        return res;
 
+        return max;
     }
-
 }
 /*
 Input: s = "abcabcbb"

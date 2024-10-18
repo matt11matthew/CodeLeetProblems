@@ -1,10 +1,10 @@
-import problems.AddTwoNumbers;
-import problems.LongestSubstringWithoutRepeatingCharacters;
-import problems.TwoSum;
+import problems.*;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        new LongestSubstringWithoutRepeatingCharacters().start();
+        new LongestPalindromicSubstring().start();
 
     }
 
